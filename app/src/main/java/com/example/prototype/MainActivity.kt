@@ -1,53 +1,65 @@
 package com.example.prototype
 
-import android.content.Intent
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
-import android.widget.Toast
+import android.widget.ImageView
+import androidx.core.os.bundleOf
+import androidx.fragment.app.add
+import androidx.fragment.app.commit
+import com.bumptech.glide.Glide
+import com.example.prototype.FirstFragment.Companion.NAME_KEY
+import com.example.prototype.FirstFragment.Companion.NAME_KEY_2
 
 class MainActivity : AppCompatActivity() {
     private lateinit var btn: Button
     private lateinit var btn2: Button
-
+    private lateinit var img: ImageView
+    private var sup = supportFragmentManager;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        btn = findViewById(R.id.boton)
-        btn2 = findViewById(R.id.boton_2)
-        btn.setOnClickListener {
-            val intent = Intent(this, SecondActivity::class.java)
-            intent.putExtra(ID_KEY, 1)
-            startActivity(intent)
+        btn = findViewById(R.id.btn1)
+        btn2 = findViewById(R.id.btn2)
+        img = findViewById(R.id.imageView)
+        Glide.with(this).load(URL_3).into(img)
+
+        fun setFragment(dato: String, url: String) {
+            if (savedInstanceState == null) {
+                val bundle = bundleOf(NAME_KEY to dato, NAME_KEY_2 to url)
+                sup.beginTransaction().apply {
+                    replace(R.id.fragmentContainer, FirstFragment()).commit()
+
+                    sup.commit {
+                        setReorderingAllowed(true)
+                        add<FirstFragment>(R.id.fragmentContainer, args = bundle)
+                    }
+
+                }
+            }
         }
-        btn2.setOnClickListener {
-            val intent = Intent(this, SecondActivity::class.java)
-            intent.putExtra(ID_KEY, 2)
-            startActivity(intent)
+
+        btn.setOnClickListener() {
+            setFragment(DATA_1, URL_1)
+            btn.visibility= View.INVISIBLE
+            btn2.visibility= View.VISIBLE
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Toast.makeText(this, "onStart()", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Toast.makeText(this, "onResume()", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Toast.makeText(this, "onPause", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Toast.makeText(this, "onDestroy", Toast.LENGTH_SHORT).show()
+        btn2.setOnClickListener() {
+            btn2.visibility= View.INVISIBLE
+            btn.visibility= View.VISIBLE
+            setFragment(DATA_2, URL_2)
+        }
     }
 
     companion object {
-        const val ID_KEY = "id"
+        const val DATA_1 = "Siegmeyer"
+        const val DATA_2 = "Solaire"
+        const val URL_1 = "https://i.pinimg.com/736x/67/f8/03/67f80319318a06251d175124bc365026.jpg"
+        const val URL_2 =
+            "https://static.wikia.nocookie.net/darksouls/images/5/54/SolaireCA.jpg/revision/latest?cb=20130128234108"
+        const val URL_3 =
+            "https://thumbs.gfycat.com/AnguishedBiodegradableJumpingbean-size_restricted.gif"
     }
 }
