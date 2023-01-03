@@ -43,12 +43,12 @@ class MainActivity : AppCompatActivity() {
 
         btn.setOnClickListener() {
             setFragment(DATA_1, URL_1)
-            btn.visibility= View.INVISIBLE
-            btn2.visibility= View.VISIBLE
+            btn.visibility = View.INVISIBLE
+            btn2.visibility = View.VISIBLE
         }
         btn2.setOnClickListener() {
-            btn2.visibility= View.INVISIBLE
-            btn.visibility= View.VISIBLE
+            btn2.visibility = View.INVISIBLE
+            btn.visibility = View.VISIBLE
             setFragment(DATA_2, URL_2)
         }
     }
