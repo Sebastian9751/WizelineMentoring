@@ -11,22 +11,38 @@
         android:id="@+id/textSolaire"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:textColor="#5BBCC8"
         app:layout_constraintBottom_toTopOf="@+id/imgSolaire"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@string/solaire"/>
+        app:layout_constraintVertical_bias="0.48000002"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="@string/solaire" />
 
     <ImageView
         android:id="@+id/imgSolaire"
         android:layout_width="322dp"
         android:layout_height="419dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/FirstFragmentGoHome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textSolaire" />
+        app:layout_constraintTop_toBottomOf="@+id/textSolaire"
+        tools:background="@color/black" />
+
+    <Button
+        android:id="@+id/FirstFragmentGoHome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Goback"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgSolaire" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
