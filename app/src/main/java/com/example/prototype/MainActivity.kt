@@ -1,53 +1,31 @@
 package com.example.prototype
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.Toast
+import android.widget.ImageView
+import androidx.appcompat.widget.Toolbar
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
+import com.bumptech.glide.Glide
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var btn: Button
-    private lateinit var btn2: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        btn = findViewById(R.id.boton)
-        btn2 = findViewById(R.id.boton_2)
-        btn.setOnClickListener {
-            val intent = Intent(this, SecondActivity::class.java)
-            intent.putExtra(ID_KEY, 1)
-            startActivity(intent)
-        }
-        btn2.setOnClickListener {
-            val intent = Intent(this, SecondActivity::class.java)
-            intent.putExtra(ID_KEY, 2)
-            startActivity(intent)
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Toast.makeText(this, "onStart()", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Toast.makeText(this, "onResume()", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Toast.makeText(this, "onPause", Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Toast.makeText(this, "onDestroy", Toast.LENGTH_SHORT).show()
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val toolbar: Toolbar = findViewById(R.id.ToolbarMain)
+        val navController = navHostFragment.navController
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        toolbar.setupWithNavController(navController, appBarConfiguration)
+        val background: ImageView = findViewById(R.id.backgroundImg)
+        Glide.with(this).load(BACKGROUND_URL).into(background)
     }
 
     companion object {
-        const val ID_KEY = "id"
+        const val BACKGROUND_URL = "https://i.gifer.com/neu.gif"
     }
+
 }
