@@ -20,7 +20,7 @@ class FirstFragment : Fragment() {
         val textCharacter1: TextView = view.findViewById(R.id.textSolaire)
         val characterImg: ImageView = view.findViewById(R.id.imgSolaire)
         val btnGoHome: Button = view.findViewById(R.id.FirstFragmentGoHome)
-        arguments?.let {
+        arguments.let {
             textCharacter1.text = arguments.nameCharacter1
             Glide.with(this).load(arguments.urlImgCharacter1).into(characterImg)
         }

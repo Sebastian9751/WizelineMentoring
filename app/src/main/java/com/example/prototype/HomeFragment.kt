@@ -18,15 +18,15 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    fun currentFragment(
-        ActionId: Int,
+    private fun currentFragment(
+        actionId: Int,
         characterNameKey: String,
         characterName: String,
         urlImgKey: String,
         ulrImgCharacter: String
     ) {
         findNavController().navigate(
-            ActionId,
+            actionId,
             bundleOf(
                 characterNameKey to characterName,
                 urlImgKey to ulrImgCharacter
