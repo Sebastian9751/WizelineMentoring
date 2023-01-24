@@ -21,11 +21,11 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         toolbar.setupWithNavController(navController, appBarConfiguration)
         val background: ImageView = findViewById(R.id.backgroundImg)
-        Glide.with(this).load(BACKGROUND_URL).into(background)
+        Glide.with(this).load(BACKGROUND_URL_IMAGE).into(background)
     }
 
     companion object {
-        const val BACKGROUND_URL = "https://i.gifer.com/neu.gif"
+        const val BACKGROUND_URL_IMAGE = "https://i.gifer.com/neu.gif"
     }
 
 }
