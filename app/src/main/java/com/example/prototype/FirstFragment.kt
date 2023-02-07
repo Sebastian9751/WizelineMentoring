@@ -11,9 +11,13 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.prototype.HomeFragmentDirections.ActionHomeFragmentToFirstFragment
+import com.example.prototype.databinding.FragmentFirstBinding
 
 
 class FirstFragment : Fragment() {
+    private var _binding:FragmentFirstBinding? =null
+    private val binding get()= _binding!!
     private val arguments: FirstFragmentArgs by navArgs()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,6 +37,7 @@ class FirstFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_first, container, false)
+        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        return binding.root
     }
 }
