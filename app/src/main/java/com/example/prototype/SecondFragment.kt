@@ -11,20 +11,22 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.prototype.databinding.FragmentSecondBinding
+
 
 class SecondFragment : Fragment() {
+    private var _binding: FragmentSecondBinding?=null
+    private val binding get() =_binding!!
+
     private val arguments: SecondFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val textCharacter1: TextView = view.findViewById(R.id.textSiegmeyer)
-        val characterImg: ImageView = view.findViewById(R.id.imgSiegmeyer)
-        val btnGoHome: Button = view.findViewById((R.id.SecondFragmentGoHome))
         arguments.let {
-            textCharacter1.text = arguments.nameCharacter2
-            Glide.with(this).load(arguments.urlImgCharacter2).into(characterImg)
+            binding.textSiegmeyer.text = arguments.nameCharacter2
+            Glide.with(requireContext()).load(arguments.urlImgCharacter2).into(binding.imgSiegmeyer)
         }
-        btnGoHome.setOnClickListener {
+        binding.SecondFragmentGoHome.setOnClickListener {
             findNavController().navigate(R.id.homeFragment)
         }
     }
@@ -33,6 +35,8 @@ class SecondFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_second, container, false)
+
+        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        return  binding.root
     }
 }

@@ -8,14 +8,25 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
+import com.example.prototype.databinding.FragmentHomeBinding
+import com.example.prototype.utils.Constanst.CHARACTER1_IMG_URL
+import com.example.prototype.utils.Constanst.CHARACTER1_IMG_URL_KEY
+import com.example.prototype.utils.Constanst.CHARACTER1_NAME_KEY
+import com.example.prototype.utils.Constanst.CHARACTER2_IMG_URL
+import com.example.prototype.utils.Constanst.CHARACTER2_IMG_URL_KEY
+import com.example.prototype.utils.Constanst.CHARACTER2_NAME_KEY
+
 
 class HomeFragment : Fragment() {
-
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+
+        _binding = FragmentHomeBinding.inflate(inflater, container, false )
+        return binding.root
     }
 
     private fun currentFragment(
@@ -36,11 +47,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val btnSolaire: Button = view.findViewById(R.id.btnSolaire)
-        val btnSiegmeyer: Button = view.findViewById(R.id.btnSiegmeyer)
-        val btnExitApp: Button = view.findViewById(R.id.btnHomeExit)
 
-        btnSolaire.setOnClickListener {
+        binding.btnSolaire.setOnClickListener {
             currentFragment(
                 R.id.action_homeFragment_to_firstFragment,
                 CHARACTER1_NAME_KEY,
@@ -50,7 +58,7 @@ class HomeFragment : Fragment() {
             )
         }
 
-        btnSiegmeyer.setOnClickListener {
+        binding.btnSolaire.setOnClickListener {
             currentFragment(
                 R.id.action_homeFragment_to_secondFragment,
                 CHARACTER2_NAME_KEY,
@@ -59,20 +67,11 @@ class HomeFragment : Fragment() {
                 CHARACTER2_IMG_URL
             )
         }
-        btnExitApp.setOnClickListener {
+        binding.btnHomeExit.setOnClickListener {
             activity?.onBackPressed();
         }
 
     }
 
-    companion object {
-        const val CHARACTER1_NAME_KEY = "nameCharacter_1"
-        const val CHARACTER2_NAME_KEY = "nameCharacter_2"
-        const val CHARACTER1_IMG_URL_KEY = "urlImgCharacter_1"
-        const val CHARACTER2_IMG_URL_KEY = "urlImgCharacter_2"
-        const val CHARACTER1_IMG_URL =
-            "https://static.wikia.nocookie.net/darksouls/images/5/54/SolaireCA.jpg/revision/latest?cb=20130128234108"
-        const val CHARACTER2_IMG_URL =
-            "https://i.pinimg.com/736x/67/f8/03/67f80319318a06251d175124bc365026.jpg"
-    }
+
 }
